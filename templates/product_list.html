@@ -1,0 +1,33 @@
+<!-- index.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}"> <!-- added custom CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Product List</h1>
+        <ul class="list-group">
+            {% for product in products %}
+                <li class="list-group-item">
+                    <a href="{% url 'product_detail' product.id %}">
+                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid" style="max-width: 100px; max-height: 100px;">
+                     <span>{{ product.name }} - ${{ product.price }}</span>
+                    </a>
+                    <div>Category: {{ product.category }}</div>
+                    <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary btn-sm float-right">Add to Cart</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'script.js' %}"></script> <!-- added custom JavaScript file -->
+</body>
+</html>

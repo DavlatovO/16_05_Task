@@ -1,0 +1,36 @@
+<!-- checkout.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style3.css' %}"> <!-- added custom CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Checkout</h1>
+        <p>Order details:</p>
+        <ul class="list-group">
+            <li class="list-group-item">Order ID: {{ order.id }}</li>
+            <li class="list-group-item">Total Price: ${{ order.total_price }}</li>
+            <li class="list-group-item">Products:</li>
+            <ul class="list-group">
+                {% for product in order.products.all %}
+                    <li class="list-group-item">{{ product.name }}</li>
+                {% endfor %}
+            </ul>
+        </ul>
+        <p class="text-center">Thank you for your purchase!</p>
+        <div class="text-center">
+            <a href="{% url 'cart' %}" class="btn btn-link">Cart</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'script3.js' %}"></script> <!-- added custom JavaScript file -->
+</body>
+</html>

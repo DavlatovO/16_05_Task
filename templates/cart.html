@@ -1,0 +1,38 @@
+<!-- shopping_cart.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}"> <!-- added custom CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Shopping Cart</h1>
+        <form method="POST" action="{% url 'update_cart' %}">
+            {% csrf_token %}
+            <ul class="list-group">
+                {% for item in cart_items %}
+                    <li class="list-group-item">
+                        {{ item.product.name }} - 
+                        <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}" min="1">
+                        <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-link text-danger">Remove</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="btn btn-primary">Update Cart</button>
+        </form>
+        <div class="text-center">
+            <a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+            <div><a href="{% url 'product_list' %}" class="btn btn-link">Products</a></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'script2.js' %}"></script> <!-- added custom JavaScript file -->
+</body>
+</html>
